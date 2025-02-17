@@ -154,7 +154,7 @@ local function stopLoop()
 end
 
 
-local interval = 1 
+local interval = 0.1
 
 
 
