@@ -109,6 +109,67 @@ while wait() do
 end
 end)
 
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local PVPToggle = ReplicatedStorage.Remotes.PVPToggle
+
+
+local isLoopActive = false
+
+
+local function enablePVP()
+    local args = { [1] = true }
+    PVPToggle:InvokeServer(unpack(args))
+    print("PVP включен")
+end
+
+
+local function disablePVP()
+    local args = { [1] = false }
+    PVPToggle:InvokeServer(unpack(args))
+    print("PVP выключен")
+end
+
+local function togglePVPLoop(interval)
+    while isLoopActive do
+        enablePVP()
+        wait(interval) 
+        disablePVP()
+        wait(interval) 
+    end
+end
+
+
+local function startLoop(interval)
+    if not isLoopActive then
+        isLoopActive = true
+        togglePVPLoop(interval)
+    end
+end
+
+
+local function stopLoop()
+    if isLoopActive then
+        isLoopActive = false
+    end
+end
+
+
+local interval = 1 
+
+
+
+
+
+Section:NewToggle("bring all tools", "притягивает все оружия", function(state)
+    if state then
+startLoop()
+    else
+stopLoop()
+    end
+end)
+
+
+
 local Tab = Window:NewTab("Teleports")
 local Section = Tab:NewSection("Teleports")
 
@@ -145,6 +206,21 @@ Section:NewDropdown("Tables", "DropdownInf", {"Table 1", "Table 2", "Table 3"}, 
         game.Players.LocalPlayer.Character:PivotTo(CFrame.new(Vector3.new(-230.5, 2105.0498046875, 213)))
     end
 end)
+
+
+Section:NewButton("spawn", "телепортирует на спавн", function()
+    if game.Players.LocalPlayer.Character then
+        game.Players.LocalPlayer.Character:PivotTo(CFrame.new(Vector3.new(27.429304122924805, 2052.999267578125, -30.69707679748535)))
+    end
+end)
+
+
+
+
+
+
+
+
 
 local Tab = Window:NewTab("Misc")
 
@@ -223,6 +299,9 @@ game.Players.LocalPlayer.Character.Humanoid.JumpPower = 50
 game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
     end
 end)
+
+
+
 
 
 
