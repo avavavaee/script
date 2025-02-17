@@ -1,5 +1,7 @@
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Robojini/Tuturial_UI_Library/main/UI_Template_1"))()
+
 local Window = Library.CreateLib("Femboy hub", "RJTheme3")
+
 local Tab = Window:NewTab("Main")
 local Section = Tab:NewSection("Main")
 
@@ -7,31 +9,22 @@ local kil = nil
 local teleporting = false
 
 local function startTeleportation()
-    -- Поиск объекта "Kil" в Workspace
     kil = game.Workspace:FindFirstChild("Kil")
     
-    -- Если объект не найден, выводим предупреждение и останавливаем выполнение
     if not kil then
         warn("Объект с именем 'Kil' не найден в Workspace!")
         return
     end
 
-    -- Переносим объект далеко за карту
     kil.CFrame = CFrame.new(0, 100000, 0)
-
-    -- Устанавливаем флаг teleporting в true
     teleporting = true
 
-    -- Запускаем цикл телепортации
     while teleporting do
-        wait(15) -- Ждем 15 секунд
-
-        -- Проверяем, существует ли объект "Kil" и доступен ли игрок
-        if kil and kil.Parent and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
+        wait(15)
+        if game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = kil.CFrame
         else
-            warn("Объект 'Kil' или игрок не найдены. Остановка телепортации.")
-            teleporting = false
+            warn("Character or HumanoidRootPart not found!")
             break
         end
     end
@@ -42,11 +35,100 @@ local function stopTeleportation()
     print("Телепортация остановлена.")
 end
 
--- Создаем переключатель для автофарма
 Section:NewToggle("autofarm", "авто фарм", function(state)
     if state then
         startTeleportation()
     else
         stopTeleportation()
+    end
+end)
+
+local isRunning = false
+
+local function hasHandle(folder)
+    for _, item in pairs(folder:GetChildren()) do
+        if item.Name == "Handle" then
+            return true
+        end
+    end
+    return false
+end
+
+local function mainLoop()
+    while isRunning do
+        local player = game.Players.LocalPlayer
+
+        if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+            for _, folder in pairs(game.Workspace:GetChildren()) do
+                if folder:IsA("Folder") and hasHandle(folder) then
+                    for _, item in pairs(folder:GetChildren()) do
+                        if item:IsA("BasePart") then
+                            item.CFrame = player.Character.HumanoidRootPart.CFrame
+                        end
+                    end
+                end
+            end
+        else
+            warn("Character or HumanoidRootPart not found!")
+            break
+        end
+
+        wait(3)
+    end
+end
+
+local function vkl()
+    if not isRunning then
+        isRunning = true
+        mainLoop()
+    end
+end
+
+local function otkl()
+    isRunning = false
+end
+
+Section:NewToggle("bring all tools", "притягивает все оружия", function(state)
+    if state then
+        vkl()
+    else
+        otkl()
+    end
+end)
+
+local Tab = Window:NewTab("Teleports")
+local Section = Tab:NewSection("Teleports")
+
+Section:NewButton("roof", "телепортирует на крышу", function()
+    if game.Players.LocalPlayer.Character then
+        game.Players.LocalPlayer.Character:PivotTo(CFrame.new(Vector3.new(-230.5, 2100.0498046875, 213)))
+    end
+end)
+
+Section:NewButton("graveyard", "телепортирует на кладбище", function()
+    if game.Players.LocalPlayer.Character then
+        game.Players.LocalPlayer.Character:PivotTo(CFrame.new(Vector3.new(-120.25, 2050.2998046875, -110)))
+    end
+end)
+
+Section:NewButton("sewage system", "телепортирует в канализацию", function()
+    if game.Players.LocalPlayer.Character then
+        game.Players.LocalPlayer.Character:PivotTo(CFrame.new(Vector3.new(-224, 2036, -82.25)))
+    end
+end)
+
+Section:NewButton("tower", "телепортирует на башню", function()
+    if game.Players.LocalPlayer.Character then
+        game.Players.LocalPlayer.Character:PivotTo(CFrame.new(Vector3.new(114.60832977294922, 2106.345703125, 218.41067504882812)))
+    end
+end)
+
+Section:NewDropdown("Tables", "DropdownInf", {"Table 1", "Table 2", "Table 3"}, function(tables)
+    if tables == "Table 1" then
+        game.Players.LocalPlayer.Character:PivotTo(CFrame.new(Vector3.new(150.5, 2050.0498046875, 136)))
+    elseif tables == "Table 2" then
+        game.Players.LocalPlayer.Character:PivotTo(CFrame.new(Vector3.new(-168.5, 2050.0498046875, 192))) 
+    elseif tables == "Table 3" then
+        game.Players.LocalPlayer.Character:PivotTo(CFrame.new(Vector3.new(-230.5, 2100.0498046875, 213)))
     end
 end)
