@@ -125,9 +125,9 @@ end)
 
 Section:NewDropdown("Tables", "DropdownInf", {"Table 1", "Table 2", "Table 3"}, function(tables)
     if tables == "Table 1" then
-        game.Players.LocalPlayer.Character:PivotTo(CFrame.new(Vector3.new(150.5, 2050.0498046875, 136)))
+        game.Players.LocalPlayer.Character:PivotTo(CFrame.new(Vector3.new(150.5, 2054.0498046875, 136)))
     elseif tables == "Table 2" then
-        game.Players.LocalPlayer.Character:PivotTo(CFrame.new(Vector3.new(-168.5, 2050.0498046875, 192))) 
+        game.Players.LocalPlayer.Character:PivotTo(CFrame.new(Vector3.new(-168.5, 2054.0498046875, 192))) 
     elseif tables == "Table 3" then
         game.Players.LocalPlayer.Character:PivotTo(CFrame.new(Vector3.new(-230.5, 2100.0498046875, 213)))
     end
