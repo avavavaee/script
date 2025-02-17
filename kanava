@@ -181,7 +181,7 @@ end
 end)
 
 
-Section:NewTextBox("TextboxText", "TextboxInfo", function(txt)
+Section:NewTextBox("tablet text (create it first)", "пишет на табличке все что угодно", function(txt)
     -- Функция для обработки текста по две буквы
     local function processText(text)
         for i = 1, #text, 2 do
@@ -339,6 +339,10 @@ game.Players.LocalPlayer.Character.Humanoid.JumpPower = 50
 game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
     end
 end)
+
+
+
+
 
 
 
