@@ -154,21 +154,31 @@ local function stopLoop()
 end
 
 
-local interval = 0.1
+local interval = 1 
 
 
 
 
 
-Section:NewToggle("bring all tools", "притягивает все оружия", function(state)
+Section:NewToggle("spam pvp", "спамит пвп", function(state)
     if state then
 startLoop()
     else
 stopLoop()
     end
 end)
+Section:NewButton("red pvp (test)", "делает красную надпись пвп", function()
 
+local args = {
+    [1] = true
+}
 
+for i = 1, 50 do
+    game:GetService("ReplicatedStorage").Remotes.PVPToggle:InvokeServer(unpack(args))
+    wait(0.1)  -- Небольшая задержка между вызовами, чтобы избежать возможных проблем
+end
+
+end)
 
 local Tab = Window:NewTab("Teleports")
 local Section = Tab:NewSection("Teleports")
