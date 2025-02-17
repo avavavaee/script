@@ -112,9 +112,89 @@ end)
 local Tab = Window:NewTab("Teleports")
 local Section = Tab:NewSection("Teleports")
 
+local Tab = Window:NewTab("Misc")
+
+
+local Section = Tab:NewSection("Misc")
+
+
+Section:NewSlider("Time", "Меняет время суток", 24, 0, function(s) 
+
+local Lighting = game:GetService("Lighting")
+
+Lighting.ClockTime = s
+
+end)
+
+local Noclip = nil
+local Clip = nil
+
+function noclip()
+    Clip = false
+    local function Nocl()
+        if Clip == false and game.Players.LocalPlayer.Character ~= nil then
+            for _,v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+                if v:IsA('BasePart') and v.CanCollide and v.Name ~= floatName then
+                    v.CanCollide = false
+                end
+            end
+        end
+        wait(0.21)
+    end
+    Noclip = game:GetService('RunService').Stepped:Connect(Nocl)
+end
+
+function clip()
+    if Noclip then Noclip:Disconnect() end
+    Clip = true
+end
+
+
+Section:NewToggle("Noclip", "Позволяет проходить сквозь стены", function(state)
+    if state then
+noclip()
+    else
+clip()
+    end
+end)
+
+Section:NewSlider("Speed", "Изменяет скорость", 500, 0, function(g)
+    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = g
+end)
+
+Section:NewSlider("Gravity", "Изменяет гравитацию", 500, 0, function(h)
+    game.Workspace.Gravity = h
+end)
+
+Section:NewSlider("JumpPower", "Изменяет силу прыжка", 500, 0, function(j)
+    game.Players.LocalPlayer.Character.Humanoid.JumpPower = j
+end)
+
+Section:NewToggle("Off gravity", "Отключает гравитацию", function(state)
+    if state then
+game.Workspace.Gravity = true
+    else
+game.Workspace.Gravity = 196.1999969482422
+    end
+end)
+
+
+Section:NewToggle("Superhuman", "Меняет скорость и силу прыжка", function(state)
+    if state then
+game.Players.LocalPlayer.Character.Humanoid.JumpPower = 100
+game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 110
+    else
+
+game.Players.LocalPlayer.Character.Humanoid.JumpPower = 50
+game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
+    end
+end)
+
+
+
 Section:NewButton("roof", "телепортирует на крышу", function()
     if game.Players.LocalPlayer.Character then
-        game.Players.LocalPlayer.Character:PivotTo(CFrame.new(Vector3.new(-230.5, 2100.0498046875, 213)))
+        game.Players.LocalPlayer.Character:PivotTo(CFrame.new(Vector3.new(-230.5, 2105.0498046875, 213)))
     end
 end)
 
@@ -142,6 +222,6 @@ Section:NewDropdown("Tables", "DropdownInf", {"Table 1", "Table 2", "Table 3"}, 
     elseif tables == "Table 2" then
         game.Players.LocalPlayer.Character:PivotTo(CFrame.new(Vector3.new(-168.5, 2060.0498046875, 192))) 
     elseif tables == "Table 3" then
-        game.Players.LocalPlayer.Character:PivotTo(CFrame.new(Vector3.new(-230.5, 2100.0498046875, 213)))
+        game.Players.LocalPlayer.Character:PivotTo(CFrame.new(Vector3.new(-230.5, 2105.0498046875, 213)))
     end
 end)
