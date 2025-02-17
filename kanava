@@ -112,6 +112,40 @@ end)
 local Tab = Window:NewTab("Teleports")
 local Section = Tab:NewSection("Teleports")
 
+Section:NewButton("roof", "телепортирует на крышу", function()
+    if game.Players.LocalPlayer.Character then
+        game.Players.LocalPlayer.Character:PivotTo(CFrame.new(Vector3.new(-230.5, 2105.0498046875, 213)))
+    end
+end)
+
+Section:NewButton("graveyard", "телепортирует на кладбище", function()
+    if game.Players.LocalPlayer.Character then
+        game.Players.LocalPlayer.Character:PivotTo(CFrame.new(Vector3.new(-120.25, 2050.2998046875, -110)))
+    end
+end)
+
+Section:NewButton("sewage system", "телепортирует в канализацию", function()
+    if game.Players.LocalPlayer.Character then
+        game.Players.LocalPlayer.Character:PivotTo(CFrame.new(Vector3.new(-224, 2036, -82.25)))
+    end
+end)
+
+Section:NewButton("tower", "телепортирует на башню", function()
+    if game.Players.LocalPlayer.Character then
+        game.Players.LocalPlayer.Character:PivotTo(CFrame.new(Vector3.new(114.60832977294922, 2110.345703125, 218.41067504882812)))
+    end
+end)
+
+Section:NewDropdown("Tables", "DropdownInf", {"Table 1", "Table 2", "Table 3"}, function(tables)
+    if tables == "Table 1" then
+        game.Players.LocalPlayer.Character:PivotTo(CFrame.new(Vector3.new(150.5, 2060.0498046875, 136)))
+    elseif tables == "Table 2" then
+        game.Players.LocalPlayer.Character:PivotTo(CFrame.new(Vector3.new(-168.5, 2060.0498046875, 192))) 
+    elseif tables == "Table 3" then
+        game.Players.LocalPlayer.Character:PivotTo(CFrame.new(Vector3.new(-230.5, 2105.0498046875, 213)))
+    end
+end)
+
 local Tab = Window:NewTab("Misc")
 
 
@@ -192,36 +226,3 @@ end)
 
 
 
-Section:NewButton("roof", "телепортирует на крышу", function()
-    if game.Players.LocalPlayer.Character then
-        game.Players.LocalPlayer.Character:PivotTo(CFrame.new(Vector3.new(-230.5, 2105.0498046875, 213)))
-    end
-end)
-
-Section:NewButton("graveyard", "телепортирует на кладбище", function()
-    if game.Players.LocalPlayer.Character then
-        game.Players.LocalPlayer.Character:PivotTo(CFrame.new(Vector3.new(-120.25, 2050.2998046875, -110)))
-    end
-end)
-
-Section:NewButton("sewage system", "телепортирует в канализацию", function()
-    if game.Players.LocalPlayer.Character then
-        game.Players.LocalPlayer.Character:PivotTo(CFrame.new(Vector3.new(-224, 2036, -82.25)))
-    end
-end)
-
-Section:NewButton("tower", "телепортирует на башню", function()
-    if game.Players.LocalPlayer.Character then
-        game.Players.LocalPlayer.Character:PivotTo(CFrame.new(Vector3.new(114.60832977294922, 2110.345703125, 218.41067504882812)))
-    end
-end)
-
-Section:NewDropdown("Tables", "DropdownInf", {"Table 1", "Table 2", "Table 3"}, function(tables)
-    if tables == "Table 1" then
-        game.Players.LocalPlayer.Character:PivotTo(CFrame.new(Vector3.new(150.5, 2060.0498046875, 136)))
-    elseif tables == "Table 2" then
-        game.Players.LocalPlayer.Character:PivotTo(CFrame.new(Vector3.new(-168.5, 2060.0498046875, 192))) 
-    elseif tables == "Table 3" then
-        game.Players.LocalPlayer.Character:PivotTo(CFrame.new(Vector3.new(-230.5, 2105.0498046875, 213)))
-    end
-end)
