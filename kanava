@@ -180,6 +180,41 @@ end
 
 end)
 
+
+
+Section:NewTextBox("TextboxText", "TextboxInfo", function(inputText)
+-- Переменная, в которую ты вводишь текст
+local inputText = "nil"  -- Замени это на свой текст
+
+-- Функция для обработки текста по две буквы
+local function processText(text)
+    for i = 1, #text, 2 do
+        local twoLetters = text:sub(i, i+1)  -- Берем по две буквы
+        -- Если буква одна, добавляем пробел (или любой другой символ)
+        if #twoLetters < 2 then
+            twoLetters = twoLetters .. " "  -- Добавляем пробел для второй буквы
+        end
+        
+        local args = {
+            [1] = "text",  -- Первый аргумент остается "text"
+            [2] = twoLetters  -- Второй аргумент — это две буквы
+        }
+        
+        -- Вызываем функцию с текущими двумя буквами
+        game:GetService("ReplicatedStorage").Remotes.SignManager:InvokeServer(unpack(args))
+    end
+end
+
+-- Вызываем функцию для обработки текста
+processText(inputText)
+end)
+
+
+
+
+
+
+
 local Tab = Window:NewTab("Teleports")
 local Section = Tab:NewSection("Teleports")
 
@@ -309,9 +344,6 @@ game.Players.LocalPlayer.Character.Humanoid.JumpPower = 50
 game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
     end
 end)
-
-
-
 
 
 
