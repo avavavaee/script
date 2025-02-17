@@ -96,6 +96,19 @@ Section:NewToggle("bring all tools", "притягивает все оружия
     end
 end)
 
+Section:NewButton("guffy walk (test)", "эффект от мефа", function()
+local plr = game.Players.LocalPlayer
+local char = plr.Character
+local Hum = char.Humanoid
+
+while wait() do
+    Hum:ChangeState("FallingDown")
+    wait(.15)
+    Hum:ChangeState("GettingUp")
+    Hum:ChangeState("RunningNoPhysics")
+end
+end)
+
 local Tab = Window:NewTab("Teleports")
 local Section = Tab:NewSection("Teleports")
 
