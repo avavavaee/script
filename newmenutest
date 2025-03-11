@@ -1,0 +1,8 @@
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({Name = "femscripts", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
+
+
+
+
+end
+OrionLib:Init()
